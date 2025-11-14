@@ -3,83 +3,455 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheese</title>
+    <title>Cheese Fan Club</title>
     <style>
-        body{
+        body {
             background-image: url(https://www.shutterstock.com/image-vector/seamless-vector-background-cheese-pattern-600nw-2282767431.jpg);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background-color 0.3s;
         }
-        h1{
-            color: rgb(13, 13, 13);
+        
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        
+        div {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(255, 248, 225, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #e6b325;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode div {
+            background-color: rgba(40, 40, 40, 0.95);
+            border-color: #8B4513;
+        }
+        
+        h1 {
+            color: #8B4513;
             text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Georgia', serif;
+            border-bottom: 3px dashed #d4a017;
+            padding-bottom: 15px;
         }
-        #p1{
-        color: rgb(17, 17, 17);
-        font-size: large;
-        font-style: italic;
+        
+        .dark-mode h1 {
+            color: #e6b325;
         }
-        #p2{
-        color: rgb(10, 10, 10);
-        font-size: large;
-        font-style: italic;
+        
+        p {
+            color: #5a3921;
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            text-align: justify;
+            transition: color 0.3s;
         }
-        #p3{
-        color: rgb(15, 15, 15);
-        font-size: large;
-        font-style: italic;
+        
+        .dark-mode p {
+            color: #f0f0f0;
         }
-        #p4{
-        color: rgb(12, 12, 12);
-        font-size: large;
-        font-style: italic;
+        
+        #p1 {
+            font-style: italic;
+            font-weight: bold;
+            background-color: rgba(230, 179, 37, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #e6b325;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        #p5{
-        color: rgb(14, 14, 14);
-        font-size: large;
-        font-style: italic;
+        
+        #p1:hover {
+            transform: scale(1.02);
+            background-color: rgba(230, 179, 37, 0.3);
         }
-        #p6{
-        color: rgb(11, 11, 11);
-        font-size: large;
-        font-style: italic;
+        
+        #p2 {
+            background-color: rgba(139, 69, 19, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            font-style: italic;
+            text-align: center;
+            border: 1px dashed #8B4513;
         }
-        #p7{
-        color: rgb(16, 16, 16); 
-        font-size: large;
-        font-style: italic;
+        
+        #p3, #p4, #p5, #p6, #p7, #p8, #p9 {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
         }
-        #p8{
-        color: rgb(18, 18, 18);
-        font-size: large;
-        font-style: italic;
+        
+        .dark-mode #p3, .dark-mode #p4, .dark-mode #p5, 
+        .dark-mode #p6, .dark-mode #p7, .dark-mode #p8, 
+        .dark-mode #p9 {
+            background-color: rgba(60, 60, 60, 0.8);
         }
-        #p9{
-        color: rgb(19, 19, 19);
-        font-size: large;
-        font-style: italic;
+        
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 2px solid #8B4513;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        button {
+            background-color: #e6b325;
+            color: #5a3921;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background-color: #d4a017;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cheese-counter {
+            background-color: rgba(230, 179, 37, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid #e6b325;
+        }
+        
+        .member-spotlight {
+            background: linear-gradient(135deg, #e6b325, #8B4513);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .cheese-fact {
+            background-color: rgba(139, 69, 19, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #8B4513;
+            cursor: pointer;
+        }
+        
+        .cheese-fact:hover {
+            background-color: rgba(139, 69, 19, 0.2);
+        }
+        
+        #cheeseAnimation {
+            text-align: center;
+            font-size: 2em;
+            margin: 20px 0;
+            height: 50px;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            div {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            p {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
     <div>
-    <h1>Cheese Fan Club</h1>
-    <p id="p1">Welcome the Cheese club by Jane and Amin,we here love and talk about cheese,we only think about cheese and only about cheese so please respect the cheese comminuty as we are so small but we accept new memebers,as members as just Amin and Jane cuz we are lonely as fuck</p>
-    <p id="p3">The production of cheese predates recorded history, beginning well over 7,000 years ago.Humans likely developed cheese and other dairy foods by accident, as a result of storing and transporting milk in bladders made of ruminants' stomachs; Within the stomach an inherent supply of rennet would encourage curdling, forming cheese. There is no conclusive evidence indicating where cheese-making originated: possibly Europe, or Central Asia, the Middle East, or the Sahara.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/9-alimenti%2C_formaggi%2CTaccuino_Sanitatis%2C_Casanatense_4182..jpg/500px-9-alimenti%2C_formaggi%2CTaccuino_Sanitatis%2C_Casanatense_4182..jpg">
-    <p id="p4">Cheeses can be categorized by their texture and aging process into several main types: fresh, soft-ripened, semi-soft, semi-hard, hard, and blue. Other classifications include pasta filata (stretched curd cheese like mozzarella) and processed cheese. Examples of cheeses in these categories include ricotta (fresh), Brie (soft-ripened), Gouda (semi-hard), and Parmesan (hard). </p>
-    <img src="https://media.istockphoto.com/id/178421857/photo/various-types-of-cheese.jpg?s=612x612&w=0&k=20&c=7OJWQOlQASFNmKmgAjf-QpCsIC4lhMylHyXvxBVOJRg=" alt="cheese-table">
-    <br>
-    <p id="p5">here is a picture of Jane's celebirity crush Gerard Way</p>
-    <img src="Screenshot 2025-11-14 154918.png" alt="Gerard way">
-    <p id="p6">Gerard Arthur Way is an American singer, songwriter, musician, and comic book writer. He is best known as the lead vocalist and co-founder of the rock band My Chemical Romance. Born on April 9, 1977, in Summit, New Jersey, Way formed My Chemical Romance in 2001, and the band quickly gained popularity with their unique blend of punk rock, emo, and alternative rock. They released several successful albums, including "Three Cheers for Sweet Revenge" (2004) and "The Black Parade" (2006), which solidified their place in the rock music scene.</p>
-    <p id="p7">Thank you for visiting the Cheese Fan Club website,we hope you enjoyed your stay and please come back again</p>
-    <p id="p8">one of the most ineresting type of cheese is Casu martzu,Casu martzu[1] (Sardinian: [ˈkazu ˈmaɾtsu]; lit. 'rotten cheese') is a Sardinian sheep milk cheese that contains live fly maggots.
-
-The larvae of the cheese fly (Piophila casei) are deliberately introduced to pecorino cheese, where their digestive action produces an advanced level of fermentation, including a breakdown of the cheese's fats. The cheese's texture softens, and a liquid called làgrima ('teardrop') may seep out.</p>
-    <p id="p9">Casu martzu is considered unsafe to eat according to food hygiene regulations, and its sale is banned by the European Union. However, it remains available on the black market and is considered a delicacy by some Sardinians.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Casu_Marzu_cheese.jpg/500px-Casu_Marzu_cheese.jpg" alt="Casu Martzu">
-   
-    <p id="p2">If you have any question please don't contact us</p>
+        <div class="controls">
+            <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+            <button onclick="changeBackground()">🎨 Change Background</button>
+            <button onclick="showRandomCheeseFact()">🧀 Random Cheese Fact</button>
+            <button onclick="startCheeseAnimation()">🎭 Cheese Animation</button>
+        </div>
+        
+        <div class="cheese-counter">
+            <h3>Cheese Love Counter</h3>
+            <p>You've shown love for cheese: <span id="cheeseCount">0</span> times!</p>
+            <button onclick="incrementCheeseCounter()">🧀 I Love Cheese! 🧀</button>
+        </div>
+        
+        <div id="cheeseAnimation"></div>
+        
+        <h1>Cheese Fan Club</h1>
+        
+        <p id="p1" onclick="celebrate()">Welcome the Cheese club by Jane and Amin, we here love and talk about cheese, we only think about cheese and only about cheese so please respect the cheese community as we are so small but we accept new members, as members as just Amin and Jane cuz we are lonely as fuck</p>
+        
+        <div class="member-spotlight" id="memberSpotlight">
+            <h3>🌟 Member Spotlight 🌟</h3>
+            <p id="spotlightContent"></p>
+        </div>
+        
+        <p id="p3" class="cheese-fact" onclick="showFact('history')">The production of cheese predates recorded history, beginning well over 7,000 years ago. Humans likely developed cheese and other dairy foods by accident, as a result of storing and transporting milk in bladders made of ruminants' stomachs; Within the stomach an inherent supply of rennet would encourage curdling, forming cheese. There is no conclusive evidence indicating where cheese-making originated: possibly Europe, or Central Asia, the Middle East, or the Sahara.</p>
+        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/9-alimenti%2C_formaggi%2CTaccuino_Sanitatis%2C_Casanatense_4182..jpg/500px-9-alimenti%2C_formaggi%2CTaccuino_Sanitatis%2C_Casanatense_4182..jpg" alt="Historical cheese" onclick="enlargeImage(this)">
+        
+        <p id="p4" class="cheese-fact" onclick="showFact('types')">Cheeses can be categorized by their texture and aging process into several main types: fresh, soft-ripened, semi-soft, semi-hard, hard, and blue. Other classifications include pasta filata (stretched curd cheese like mozzarella) and processed cheese. Examples of cheeses in these categories include ricotta (fresh), Brie (soft-ripened), Gouda (semi-hard), and Parmesan (hard).</p>
+        
+        <img src="https://media.istockphoto.com/id/178421857/photo/various-types-of-cheese.jpg?s=612x612&w=0&k=20&c=7OJWQOlQASFNmKmgAjf-QpCsIC4lhMylHyXvxBVOJRg=" alt="cheese-table" onclick="enlargeImage(this)">
+        
+        <br>
+        
+        <p id="p5">here is a picture of Jane's celebrity crush Gerard Way</p>
+        
+        <img src="Screenshot 2025-11-14 154918.png" alt="Gerard way" onclick="enlargeImage(this)">
+        
+        <p id="p6">Gerard Arthur Way is an American singer, songwriter, musician, and comic book writer. He is best known as the lead vocalist and co-founder of the rock band My Chemical Romance. Born on April 9, 1977, in Summit, New Jersey, Way formed My Chemical Romance in 2001, and the band quickly gained popularity with their unique blend of punk rock, emo, and alternative rock. They released several successful albums, including "Three Cheers for Sweet Revenge" (2004) and "The Black Parade" (2006), which solidified their place in the rock music scene.</p>
+        
+        <p id="p7">Thank you for visiting the Cheese Fan Club website, we hope you enjoyed your stay and please come back again</p>
+        
+        <p id="p8" class="cheese-fact" onclick="showFact('casu')">One of the most interesting type of cheese is Casu martzu, Casu martzu[1] (Sardinian: [ˈkazu ˈmaɾtsu]; lit. 'rotten cheese') is a Sardinian sheep milk cheese that contains live fly maggots. The larvae of the cheese fly (Piophila casei) are deliberately introduced to pecorino cheese, where their digestive action produces an advanced level of fermentation, including a breakdown of the cheese's fats. The cheese's texture softens, and a liquid called làgrima ('teardrop') may seep out.</p>
+        
+        <p id="p9">Casu martzu is considered unsafe to eat according to food hygiene regulations, and its sale is banned by the European Union. However, it remains available on the black market and is considered a delicacy by some Sardinians.</p>
+        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Casu_Marzu_cheese.jpg/500px-Casu_Marzu_cheese.jpg" alt="Casu Martzu" onclick="enlargeImage(this)">
+       
+        <p id="p2">If you have any question please don't contact us</p>
+        
+        <div class="controls">
+            <button onclick="showMembers()">👥 Show Club Members</button>
+            <button onclick="cheeseQuiz()">❓ Cheese Quiz</button>
+        </div>
     </div>
-</body>
 
+    <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const button = event.target;
+            button.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+        }
+        
+        // Cheese Counter
+        let cheeseCount = 0;
+        function incrementCheeseCounter() {
+            cheeseCount++;
+            document.getElementById('cheeseCount').textContent = cheeseCount;
+            
+            // Add celebration effect
+            celebrate();
+            
+            // Show member spotlight every 5 clicks
+            if (cheeseCount % 5 === 0) {
+                showMemberSpotlight();
+            }
+        }
+        
+        // Celebration Effect
+        function celebrate() {
+            const celebration = document.createElement('div');
+            celebration.style.position = 'fixed';
+            celebration.style.top = '0';
+            celebration.style.left = '0';
+            celebration.style.width = '100%';
+            celebration.style.height = '100%';
+            celebration.style.pointerEvents = 'none';
+            celebration.style.zIndex = '1000';
+            document.body.appendChild(celebration);
+            
+            for (let i = 0; i < 50; i++) {
+                const emoji = document.createElement('div');
+                emoji.textContent = '🧀';
+                emoji.style.position = 'absolute';
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                emoji.style.animation = `fall ${Math.random() * 2 + 1}s linear forwards`;
+                celebration.appendChild(emoji);
+            }
+            
+            setTimeout(() => {
+                document.body.removeChild(celebration);
+            }, 2000);
+        }
+        
+        // Add CSS for falling animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Random Cheese Facts
+        const cheeseFacts = [
+            "There are over 2,000 varieties of cheese!",
+            "The most expensive cheese costs $1,000 per pound!",
+            "Cheese is a great source of calcium and protein!",
+            "The world's largest cheese weighed over 57,000 pounds!",
+            "Mouse really do love cheese!",
+            "The smellier the cheese, the better it tastes!",
+            "Wisconsin produces over 3 billion pounds of cheese annually!",
+            "The ancient Romans were great cheese makers!"
+        ];
+        
+        function showRandomCheeseFact() {
+            const randomFact = cheeseFacts[Math.floor(Math.random() * cheeseFacts.length)];
+            alert(`🧀 Cheese Fact: ${randomFact}`);
+        }
+        
+        function showFact(type) {
+            const facts = {
+                history: "Fun fact: The first cheese was probably made by accident!",
+                types: "Did you know? Blue cheese gets its color from mold spores!",
+                casu: "Warning: Casu martzu is illegal in many countries!"
+            };
+            alert(facts[type] || "🧀 Cheese is amazing!");
+        }
+        
+        // Image Enlargement
+        function enlargeImage(img) {
+            img.classList.toggle('enlarged');
+            if (img.classList.contains('enlarged')) {
+                img.style.transform = 'scale(1.8)';
+                img.style.zIndex = '1000';
+                img.style.position = 'relative';
+            } else {
+                img.style.transform = 'scale(1)';
+                img.style.zIndex = 'auto';
+                img.style.position = 'static';
+            }
+        }
+        
+        // Background Changer
+        const backgrounds = [
+            'url(https://www.shutterstock.com/image-vector/seamless-vector-background-cheese-pattern-600nw-2282767431.jpg)',
+            'linear-gradient(45deg, #e6b325, #8B4513, #5a3921)',
+            'url(https://img.freepik.com/free-vector/hand-drawn-cheese-seamless-pattern_23-2148956423.jpg)', /* Missing comma */
+            'linear-gradient(135deg, #fff8e1, #ffe0b2)',
+            'url(https://t3.ftcdn.net/jpg/02/45/86/92/360_F_245869234_UyHEzCOoRDYLdS54XBsB1Hvv4sNfj2q4.jpg)',
+            'url(https://www.publicdomainpictures.net/pictures/320000/velka/cheese-pattern-background.jpg)'
+        ];
+        
+        function changeBackground() {
+            const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+            document.body.style.backgroundImage = randomBg;
+        }
+        
+        // Member Spotlight
+        const members = [
+            "Jane - Founder and Head Cheese Enthusiast!",
+            "Amin - Co-founder and Cheese Historian!",
+            "Gerard Way - Honorary Cheese Club Member!",
+            "You - Our newest cheese lover!"
+        ];
+        
+        function showMemberSpotlight() {
+            const spotlight = document.getElementById('memberSpotlight');
+            const content = document.getElementById('spotlightContent');
+            const randomMember = members[Math.floor(Math.random() * members.length)];
+            
+            content.textContent = randomMember;
+            spotlight.style.display = 'block';
+            
+            setTimeout(() => {
+                spotlight.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showMembers() {
+            alert("🧀 Club Members:\n" + members.join('\n'));
+        }
+        
+        // Cheese Animation
+        function startCheeseAnimation() {
+            const animationDiv = document.getElementById('cheeseAnimation');
+            const messages = ["CHEESE!", "I LOVE CHEESE!", "GOUDA TIMES!", "BRIE-LIANT!", "FETA-LICIOUS!","I LOVE GERARD WAY!"];
+            let index = 0;
+            
+            const interval = setInterval(() => {
+                animationDiv.textContent = messages[index];
+                animationDiv.style.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                animationDiv.style.transform = `scale(${1 + Math.random() * 0.5})`;
+                index = (index + 1) % messages.length;
+            }, 500);
+            
+            setTimeout(() => {
+                clearInterval(interval);
+                animationDiv.textContent = '';
+            }, 5000);
+        }
+        
+        // Cheese Quiz
+        function cheeseQuiz() {
+            const answer = prompt("🧀 Cheese Quiz: What cheese is known for having live maggots?\nA) Brie\nB) Cheddar\nC) Casu Martzu\nD) Gouda");
+            
+            if (answer && answer.toUpperCase() === 'C') {
+                alert("🎉 Correct! You're a true cheese expert!");
+                incrementCheeseCounter();
+            } else {
+                alert("😢 Wrong! It's Casu Martzu. Read our website more carefully!");
+            }
+            const quizButton = event.target;
+            quizButton.disabled = true;
+            quizButton.textContent = "✅ Quiz Completed";
+            quizButton.style.backgroundColor = "green";
+            quizButton.style.color = "white";
+            quizButton.style.cursor = "default";
+            quizButton.style.pointerEvents = "none";
+        }
+        
+        // Interactive hover effects for all paragraphs
+        document.querySelectorAll('p').forEach(p => {
+            p.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+                this.style.transition = 'transform 0.3s';
+            });
+            
+            p.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+        
+        console.log("🧀 Welcome to the Cheese Fan Club! May your life be filled with gouda times!");
+    </script>
+</body>
 </html>
